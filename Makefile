@@ -19,7 +19,7 @@ openvino:
 		sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB && \
 		echo "deb https://apt.repos.intel.com/openvino/2022 focal main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2022.list && \
 		sudo apt update && \
-		sudo apt install openvino && \
+		sudo apt install -y openvino openvino-opencv ffmpeg && \
 		cd ${OPENVINO_ROOT}/install_dependencies && \
 			sudo -E ./install_openvino_dependencies.sh && \
 			sudo -E ./install_NEO_OCL_driver.sh; \
@@ -44,7 +44,17 @@ open_model_zoo:
 	fi
 		
 
-
+docker:
+	$(call msg,Installing the Docker Engine ...) && \
+	sudo apt update -y && \
+	sudo sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && \
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
+	sudo apt update -y && \
+	sudo apt install -y docker-ce && \
+	sudo usermod -aG docker ${USER} && \
+	su - ${USER}
+	
 #----------------------------------------------------------------------------------------------------------------------
 # helper functions
 #----------------------------------------------------------------------------------------------------------------------

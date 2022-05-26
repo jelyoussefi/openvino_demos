@@ -16,8 +16,7 @@ docker run --rm -d \
 		--model_path /models \
 		--model_name person-vehicle-detection \
 		--port 9001  \
-		--target_device GPU \
-		> /dev/null
+		--target_device GPU 
 
 echo "------------------------------------------------"
 echo -e "\tStarting the application"
