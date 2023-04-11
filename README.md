@@ -1,4 +1,4 @@
-# Openvino Demos
+# <center>OpenVINO Demos</center>
 ## Pre-requisite :
 ~~~
 docker engine
