@@ -17,7 +17,6 @@ WORKDIR  /workspace/
 RUN git clone --recurse-submodules https://github.com/openvinotoolkit/open_model_zoo.git
 RUN pip3 install -r ./open_model_zoo/demos/common/python/requirements.txt
 
-COPY run.sh  /workspace
 COPY labels  /workspace/labels
 WORKDIR  /workspace
 
