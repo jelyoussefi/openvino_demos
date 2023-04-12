@@ -26,7 +26,7 @@ build:
 	@docker build  -t ${DOCKER_IMAGE_NAME} .
 	
 object_detection: build
-	@$(call msg, Starting Object Detection demo   ...)
+	@$(call msg, Starting Object Detection demo with yolo  ...)
 	@xhost +
 	@docker run ${DOCKER_RUN_PARAMS} \
 		python3 ./open_model_zoo/demos/object_detection_demo/python/object_detection_demo.py \
@@ -37,6 +37,18 @@ object_detection: build
 			--loop \
 			-i ./streams/video2.mp4 \
 
+object_detection_ssd: build
+	@$(call msg, Starting Object Detection demo width ssd  ...)
+	@xhost +
+	@docker run ${DOCKER_RUN_PARAMS} \
+		python3 ./open_model_zoo/demos/object_detection_demo/python/object_detection_demo.py \
+			-m ./models/public/ssd_mobilenet_v1_coco/FP16/ssd_mobilenet_v1_coco.xml \
+			-at ssd \
+			--labels ./labels/ssd.txt \
+			-d GPU \
+			--loop \
+			-i ./streams/video2.mp4 \
+			
 road_segmentation: build
 	@$(call msg, Starting Road Segmentation demo   ...)
 	@xhost +
